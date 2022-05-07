@@ -1,5 +1,8 @@
-headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
-
+# headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
+headers = {
+    'User-Agent': 'My User Agent 1.0',
+    'From': 'youremail@domain.com'  # This is another valid field
+}
 pages = ['https://www.amazon.in/s?k=mixer&rh=n%3A4375446031&ref=nb_sb_noss'] 
 pages_10 = [str('https://www.amazon.in/s?k=mixer&i=kitchen&rh=n%3A4375446031&page=2&qid=1651850965&ref=sr_pg_' + str(i)) for i in range(2, 11)]
 
