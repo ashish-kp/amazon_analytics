@@ -1,26 +1,24 @@
 # headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
+import requests
+import bs4
 headers = {
     'User-Agent': 'My User Agent 1.0',
     'From': 'youremail@domain.com'  # This is another valid field
 }
-pages = ['https://www.amazon.in/s?k=mixer&rh=n%3A4375446031&ref=nb_sb_noss'] 
-pages_10 = [str('https://www.amazon.in/s?k=mixer&i=kitchen&rh=n%3A4375446031&page=2&qid=1651850965&ref=sr_pg_' + str(i)) for i in range(2, 11)]
 
-pagesn = pages + pages_10
-links = []
-
-
-for page in pagesn:
-    one_page = requests.get(page, headers = headers)
-    print(one_page.status_code)
-    sp = bs4.BeautifulSoup(one_page.content, 'html.parser')
-    links_only = sp.select('a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style.a-text-normal')
-    for i in range(len(links_only)):
-        if i % 2 == 0:
-            links.append('https://www.amazon.in/'+links_only[i]['href'])
+file = open('amazon_links.txt', 'r')
+for link in file:
+    link = link.strip()
+    # print(link)
+    one_page = requests.get(link, headers = headers)
+    soup = bs4.BeautifulSoup(one_page.content, 'html.parser')
+    
+    title = soup.find('span', {'id': 'productTitle'})
+    #links_only = sp.select('a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style.a-text-normal')
+    print(one_page.status_code, ' -> ', title)
 
 
-
+exit()
 count = 1
 reviews = []
 for link in links:
